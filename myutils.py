@@ -22,13 +22,11 @@ def get_respose(model:str, prompt:str) -> str:
     Get response from Gemini API.
     """
     client = genai.Client(api_key=GEMINI_API_KEY)
-    response = client.chat.completions.create(
+    response = client.models.generate_content(
         model=model,
-        messages=[
-            {"role": "user", "content": prompt}
-        ]
+        contents = prompt
     )
-    return response.choices[0].message.content
+    return response.text
 
 
 # === Data Loading ===
